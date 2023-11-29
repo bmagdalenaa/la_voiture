@@ -1,0 +1,2 @@
+class ContactList < ApplicationRecord
+end
