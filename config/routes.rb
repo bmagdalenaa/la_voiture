@@ -1,6 +1,7 @@
-Rails.application.routes.draw do\
+Rails.application.routes.draw do
   root "home#index"
-
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :home, only: %i[index]
   resources :color, only: %i[index show]
   resources :contact_list, only: %i[index show]
