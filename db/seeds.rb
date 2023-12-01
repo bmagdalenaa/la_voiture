@@ -12,21 +12,23 @@ unless AdminUser.exists?(email: 'admin@example.com')
 end
 
 # Colors
+# Color.delete_all
 # 10.times do
 #   Color.create(color_name: Faker::Vehicle.color)
 # end
 
 # Fuel
+# Fuel.delete_all
 # 6.times do
 #   Fuel.create(fuel_name: Faker::Vehicle.fuel_type)
 # end
 
 # Type
+# Type.delete_all
 # 11.times do
 #   Type.create(type_name: Faker::Vehicle.car_type)
 # end
 
-# Model - did not work... error.
-# 100.times do
+# 5.times do
 #   Model.create(model_name: Faker::Vehicle.model)
 # end
