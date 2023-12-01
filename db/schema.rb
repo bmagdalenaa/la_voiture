@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_30_194102) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_01_161744) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -83,7 +83,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_194102) do
   end
 
   create_table "order_details", force: :cascade do |t|
-    t.integer "contact_id"
     t.integer "order_number"
     t.float "order_price"
     t.date "order_date"
@@ -113,6 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_194102) do
     t.integer "order_details_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vehicle_color"
+    t.integer "vehicle_year"
     t.index ["fuel_id"], name: "index_vehicles_on_fuel_id"
     t.index ["model_id"], name: "index_vehicles_on_model_id"
     t.index ["order_details_id"], name: "index_vehicles_on_order_details_id"
