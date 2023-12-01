@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'car_models/index'
+  get 'car_models/show'
   root "home#index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
   resources :fuel, only: %i[index show]
   resources :manufacturer, only: %i[index show]
   resources :model_colors, only: %i[index show]
-  resources :model, only: %i[index show]
+  resources :car_models, only: %i[index show]
   resources :order_details, only: %i[index show]
   resources :type, only: %i[index show]
   resources :vehicle, only: %i[index show]
