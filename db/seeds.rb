@@ -28,7 +28,3 @@ end
 # 11.times do
 #   Type.create(type_name: Faker::Vehicle.car_type)
 # end
-
-# 5.times do
-#   Model.create(model_name: Faker::Vehicle.model)
-# end
