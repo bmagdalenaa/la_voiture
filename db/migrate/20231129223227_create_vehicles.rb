@@ -8,6 +8,7 @@ class CreateVehicles < ActiveRecord::Migration[7.0]
       t.references :model, null: false, foreign_key: true
       t.references :fuel, null: false, foreign_key: true
       t.references :order_details, null: false, foreign_key: true
+      t.references :color, null: false, foreign_key: true
 
       t.timestamps
     end
