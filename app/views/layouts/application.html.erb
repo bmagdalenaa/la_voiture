@@ -14,6 +14,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <section class="section">
+      <%= render partial: 'layouts/components/menu' %>
+      <%= yield %>
+    </section>
   </body>
 </html>
