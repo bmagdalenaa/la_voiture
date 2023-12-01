@@ -1,4 +1,4 @@
-ActiveAdmin.register Model do
+ActiveAdmin.register CarModel do
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -6,12 +6,11 @@ ActiveAdmin.register Model do
   # Uncomment all parameters which should be permitted for assignment
   #
   permit_params :model_name
-  permit_params :manufacturer_id
   #
   # or
   #
   # permit_params do
-  #   permitted = [:manufacturer_name]
+  #   permitted = [:color_name]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end

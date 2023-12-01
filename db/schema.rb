@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_01_161744) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_01_165540) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -35,6 +35,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_161744) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "car_models", force: :cascade do |t|
+    t.string "car_model_name"
+    t.integer "manufacturer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["manufacturer_id"], name: "index_car_models_on_manufacturer_id"
   end
 
   create_table "colors", force: :cascade do |t|
@@ -72,14 +80,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_161744) do
     t.datetime "updated_at", null: false
     t.index ["color_id"], name: "index_model_colors_on_color_id"
     t.index ["model_id"], name: "index_model_colors_on_model_id"
-  end
-
-  create_table "models", force: :cascade do |t|
-    t.string "model_name"
-    t.integer "manufacturer_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["manufacturer_id"], name: "index_models_on_manufacturer_id"
   end
 
   create_table "order_details", force: :cascade do |t|
@@ -120,12 +120,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_161744) do
     t.index ["type_id"], name: "index_vehicles_on_type_id"
   end
 
+  add_foreign_key "car_models", "manufacturers"
+  add_foreign_key "model_colors", "car_models", column: "model_id"
   add_foreign_key "model_colors", "colors"
-  add_foreign_key "model_colors", "models"
-  add_foreign_key "models", "manufacturers"
   add_foreign_key "order_details", "contact_lists"
+  add_foreign_key "vehicles", "car_models", column: "model_id"
   add_foreign_key "vehicles", "fuels"
-  add_foreign_key "vehicles", "models"
   add_foreign_key "vehicles", "order_details", column: "order_details_id"
   add_foreign_key "vehicles", "types"
 end
