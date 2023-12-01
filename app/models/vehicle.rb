@@ -3,4 +3,5 @@ class Vehicle < ApplicationRecord
   belongs_to :model
   belongs_to :fuel
   belongs_to :order_details
+  belongs_to :color
 end
