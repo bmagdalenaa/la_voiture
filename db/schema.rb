@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_01_165540) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_01_161744) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -110,10 +110,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_165540) do
     t.integer "model_id", null: false
     t.integer "fuel_id", null: false
     t.integer "order_details_id", null: false
+    t.integer "color_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "vehicle_color"
     t.integer "vehicle_year"
+    t.index ["color_id"], name: "index_vehicles_on_color_id"
     t.index ["fuel_id"], name: "index_vehicles_on_fuel_id"
     t.index ["model_id"], name: "index_vehicles_on_model_id"
     t.index ["order_details_id"], name: "index_vehicles_on_order_details_id"
@@ -121,11 +122,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_165540) do
   end
 
   add_foreign_key "car_models", "manufacturers"
-  add_foreign_key "model_colors", "car_models", column: "model_id"
   add_foreign_key "model_colors", "colors"
+  add_foreign_key "model_colors", "models"
   add_foreign_key "order_details", "contact_lists"
-  add_foreign_key "vehicles", "car_models", column: "model_id"
+  add_foreign_key "vehicles", "colors"
   add_foreign_key "vehicles", "fuels"
+  add_foreign_key "vehicles", "models"
   add_foreign_key "vehicles", "order_details", column: "order_details_id"
   add_foreign_key "vehicles", "types"
 end
