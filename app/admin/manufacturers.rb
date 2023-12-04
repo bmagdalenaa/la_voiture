@@ -15,4 +15,11 @@ ActiveAdmin.register Manufacturer do
   #   permitted
   # end
 
+  form do |f|
+    f.inputs do
+      f.input :manufacturer_name
+    end
+    f.actions
+  end
+
 end

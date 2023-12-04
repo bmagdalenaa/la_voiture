@@ -1,10 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+require "csv"
+
+# CSV FILE DATA
+# opens and reads greatest_hits.csv
+filename = Rails.root.join("db/car_data.csv")
+puts "Loading Cars from the CSV file: #{filename}"
+csv_data = File.read(filename)
+
+car_data = CSV.parse(csv_data, headers: true, encoding: "utf-8")
+
+Manufacturer.destroy_all
+
+car_data.each do |c|
+  manufacturer = Manufacturer.create(manufacturer_name: c["manufacturer_name"])
+end
+
 require 'faker'
 
 unless AdminUser.exists?(email: 'admin@example.com')

@@ -15,4 +15,13 @@ ActiveAdmin.register CarModel do
   #   permitted
   # end
 
+  form do |f|
+    f.inputs do
+      f.input :car_model_name
+      f.input :manufacturer_id
+      f.input :description
+    end
+    f.actions
+  end
+
 end

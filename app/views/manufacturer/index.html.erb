@@ -1,2 +1,5 @@
-<h1>Manufacturer#index</h1>
-<p>Find me in app/views/manufacturer/index.html.erb</p>
+<h1>Manufacturers</h1>
+
+<% @manufacturers.each do |manufacturer| %>
+  <p><%= link_to manufacturer.manufacturer_name, manufacturer %></p>
+<% end %>
