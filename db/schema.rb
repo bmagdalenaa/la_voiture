@@ -87,9 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_161744) do
     t.float "order_price"
     t.date "order_date"
     t.integer "quantity"
-    t.float "gst"
-    t.float "pst"
-    t.float "harmonized_tax"
     t.integer "contact_list_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
