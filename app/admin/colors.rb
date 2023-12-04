@@ -5,7 +5,7 @@ ActiveAdmin.register Color do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :color_name
+  permit_params :color_name
   #
   # or
   #
@@ -14,5 +14,5 @@ ActiveAdmin.register Color do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
 end

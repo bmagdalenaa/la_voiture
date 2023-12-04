@@ -2,4 +2,6 @@
 
 <h2>Models:</h2>
 
-<p>Find me in app/views/manufacturer/show.html.erb</p>
+<% @carModel.each do |c| %>
+  <p><%= link_to c.car_model_name, c %></p>
+<% end %>

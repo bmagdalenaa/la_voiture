@@ -5,7 +5,7 @@ ActiveAdmin.register CarModel do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :model_name
+  permit_params :car_model_name, :manufacturer_id, :description
   #
   # or
   #
@@ -16,11 +16,8 @@ ActiveAdmin.register CarModel do
   # end
 
   form do |f|
-    f.inputs do
-      f.input :car_model_name
-      f.input :manufacturer_id
-      f.input :description
-    end
+    f.semantic_errors
+    f.inputs
     f.actions
   end
 
