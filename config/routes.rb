@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'provinces/index'
+  get 'provinces/show'
   get 'car_models/index'
   get 'car_models/show'
   root "home#index"
