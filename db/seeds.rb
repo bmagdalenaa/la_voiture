@@ -8,19 +8,19 @@ csv_data = File.read(filename)
 
 car_data = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
-Manufacturer.destroy_all
+# Manufacturer.destroy_all
 
-car_data.each do |c|
-  manufacturer = Manufacturer.create(manufacturer_name: c["manufacturer_name"])
-end
+# car_data.each do |c|
+#   manufacturer = Manufacturer.create(manufacturer_name: c["manufacturer_name"])
+# end
 
 require 'faker'
 
-unless AdminUser.exists?(email: 'admin@example.com')
-  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
-end
+# unless AdminUser.exists?(email: 'admin@example.com')
+#   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# end
 
-# Colors
+# Color
 # 10.times do
 #   Color.create(color_name: Faker::Vehicle.color)
 # end
@@ -33,9 +33,4 @@ end
 # Type
 # 11.times do
 #   Type.create(type_name: Faker::Vehicle.car_type)
-# end
-
-# Model - did not work... error.
-# 100.times do
-#   Model.create(model_name: Faker::Vehicle.model)
 # end

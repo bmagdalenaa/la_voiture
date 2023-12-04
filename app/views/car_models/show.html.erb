@@ -1,2 +1,10 @@
-<h1>CarModels#show</h1>
-<p>Find me in app/views/car_models/show.html.erb</p>
+<h1><%= @carModel.car_model_name%></h1>
+
+<% @manufacturer.each do |c| %>
+  <% if c.id == @carModel.manufacturer_id%>
+    <h3>Manufacturer: <%= link_to c.manufacturer_name, c %></h3>
+  <% end %>
+<% end %>
+
+<p><%= @carModel.description %></p>
+

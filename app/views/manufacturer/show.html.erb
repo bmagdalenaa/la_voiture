@@ -3,5 +3,7 @@
 <h2>Models:</h2>
 
 <% @carModel.each do |c| %>
-  <p><%= link_to c.car_model_name, c %></p>
+  <% if c.manufacturer_id == @manufacturer.id%>
+    <p><%= link_to c.car_model_name, c %></p>
+  <% end %>
 <% end %>
