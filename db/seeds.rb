@@ -40,18 +40,18 @@ puts "Created #{Province.count} provinces."
 
 # Colors
 10.times do
-  Color.create(color_name: Faker::Vehicle.color)
-  # Color.find_or_create_by(color_name: color_name)
+  color_name = Faker::Vehicle.color
+  Color.find_or_create_by(color_name: color_name)
 end
 
 # Fuel
 6.times do
-  Fuel.create(fuel_name: Faker::Vehicle.fuel_type)
-  # Fuel.find_or_create_by(fuel_name: fuel_name)
+  fuel_name = Faker::Vehicle.fuel_type
+  Fuel.find_or_create_by(fuel_name: fuel_name)
 end
 
 # Type
-11.times do
-  Type.create(type_name: Faker::Vehicle.car_type)
-  # Type.find_or_create_by(type_name: type_name)
+10.times do
+  type_name = Faker::Vehicle.car_type
+  Type.find_or_create_by(type_name: type_name)
 end
