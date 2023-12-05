@@ -19,7 +19,7 @@ unless AdminUser.exists?(email: 'admin@example.com')
 end
 
 # Import data from a csv file to Province table
-filename = Rails.root.join("db/province.csv")
+filename = Rails.root.join("db/provinces_data.csv")
 puts "Loading Provinces from the CSV file: #{filename}"
 csv_data = File.read(filename)
 provinces = CSV.parse(csv_data, headers: true, encoding: "utf-8")
@@ -27,7 +27,7 @@ provinces = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 provinces.each do |row|
   puts "Processing row: #{row.inspect}"
   puts "province_name: #{row['province_name']}"
-  province = Province.create(
+  Province.create(
     province_name: row["province_name"],
     pst: row["pst"].presence || 0.0,
     gst: row["gst"].presence || 0.0,
