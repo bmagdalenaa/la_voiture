@@ -1,4 +1,7 @@
 class CarModel < ApplicationRecord
+  def to_s
+    self.car_model_name
+  end
   belongs_to :manufacturer
 
   validates :car_model_name, presence: true
