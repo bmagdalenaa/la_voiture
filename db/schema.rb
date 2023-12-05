@@ -88,13 +88,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_204337) do
     t.float "order_price"
     t.date "order_date"
     t.integer "quantity"
-    t.float "gst"
-    t.float "pst"
-    t.float "harmonized_tax"
     t.integer "contact_list_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["contact_list_id"], name: "index_order_details_on_contact_list_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "province_name"
+    t.float "pst"
+    t.float "gst"
+    t.float "hst"
+    t.float "total_tax_rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "types", force: :cascade do |t|

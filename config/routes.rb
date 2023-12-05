@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :home, only: %i[index]
+  resources :provinces, only: %i[index show]
   resources :color, only: %i[index show]
   resources :contact_list, only: %i[index show]
   resources :fuel, only: %i[index show]
