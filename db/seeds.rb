@@ -19,7 +19,7 @@ unless AdminUser.exists?(email: 'admin@example.com')
   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 end
 
-# # Import data from a csv file to Manufacturer table
+# Import data from a csv file to Manufacturer table
 # filename_car = Rails.root.join("db/car_data.csv")
 # puts "Loading Cars from the CSV file: #{filename_car}"
 # csv_data = File.read(filename_car)

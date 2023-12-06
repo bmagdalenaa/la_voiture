@@ -7,5 +7,6 @@ class ManufacturerController < ApplicationController
   def show
     @manufacturer = Manufacturer.find(params[:id])
     @carModel = CarModel.all.where("manufacturer_id" == @manufacturer)
+    # @carModels = CarModel.where(manufacturer_id: @manufacturer.id)
   end
 end

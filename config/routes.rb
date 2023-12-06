@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :home, only: %i[index]
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   resources :order_details, only: %i[index show]
   resources :type, only: %i[index show]
   resources :vehicle, only: %i[index show]
-
+  resources :vehicles, only: %i[index show]
+  resources :abouts
+  resources :contacts
   root "home#index"
 end
