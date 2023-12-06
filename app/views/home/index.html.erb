@@ -21,7 +21,7 @@
       <% @featured_vehicles.each do |vehicle| %>
         <div class="col mb-5">
           <div class="card h-100">
-            <%= link_to vehicle_path(vehicle) do %>
+            <%= link_to vehicles_path(vehicle) do %>
               <%= image_tag(vehicle.image_url, alt: vehicle.model, class: 'card-img-top') %>
             <% end %>
             <!-- Vehicle details placerholder -->
