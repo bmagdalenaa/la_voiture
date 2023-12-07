@@ -1,9 +1,3 @@
-<% if @no_entries_message %>
-  <div class="alert alert-warning">
-    <%= @no_entries_message %>
-  </div>
-<% end %>
-
 <div class="container mt-5">
   <h1 class="fw-bold mb-4">Manufacturers</h1>
 
@@ -20,6 +14,12 @@
       <% end %>
     </div>
   </div>
+
+  <% if @no_entries_message %>
+    <div class="alert alert-warning">
+      <%= @no_entries_message %>
+    </div>
+  <% end %>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @manufacturers.each do |manufacturer| %>

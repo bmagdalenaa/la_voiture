@@ -19,6 +19,12 @@
     </div>
   </div>
 
+  <% if @no_entries_message %>
+    <div class="alert alert-warning">
+      <%= @no_entries_message %>
+    </div>
+  <% end %>
+
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @car_models.each do |car_model| %>
       <div class="col">
