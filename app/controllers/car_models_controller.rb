@@ -1,6 +1,5 @@
 class CarModelsController < ApplicationController
   def index
-    @carModels = CarModel.all
     @manufacturers = Manufacturer.all
     @selected_letter = params[:letter]&.upcase
     @selected_number = params[:number]
@@ -14,11 +13,14 @@ class CarModelsController < ApplicationController
     else
       @car_models = CarModel.order(:car_model_name)
     end
+
+    @car_models = @car_models.page(params[:page]).per(10) # Adjust the per value as per your requirement
+
     @no_entries_message = "Sorry, there are no entries for the listed letter." if @car_models.empty?
   end
 
   def show
     @carModel = CarModel.find(params[:id])
-    @manufacturer = Manufacturer.all.where(@manufacturer == @carModel.manufacturer_id)
+    @manufacturer = Manufacturer.find(@carModel.manufacturer_id)
   end
 end

@@ -11,6 +11,8 @@ class ManufacturerController < ApplicationController
                                       .order(:manufacturer_name)
 
       @no_entries_message = "Sorry, there are no entries for the listed letter." if @manufacturers.empty?
+    else
+      @manufacturers = @manufacturers.page(params[:page]).per(10) # Adjust the per value as per your requirement
     end
   end
 
