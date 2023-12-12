@@ -1,9 +1,18 @@
-<h1><%= @manufacturer.manufacturer_name%></h1>
+<div class="container mt-5">
+  <h1 class="mb-4"><%= @manufacturer.manufacturer_name %></h1>
 
-<h2>Models:</h2>
+  <h2 class="mb-3">Models:</h2>
 
-<% @carModel.each do |c| %>
-  <% if c.manufacturer_id == @manufacturer.id%>
-    <p><%= link_to c.car_model_name, c %></p>
-  <% end %>
-<% end %>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @carModel.each do |car_model| %>
+      <div class="col">
+        <div class="card h-100">
+            <%= image_tag 'coming-soon.jpg', class: "card-img-top", alt: "Coming soon" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to car_model.car_model_name, car_model %></h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
