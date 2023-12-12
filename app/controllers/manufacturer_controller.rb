@@ -1,19 +1,12 @@
 class ManufacturerController < ApplicationController
   def index
-    # @manufacturers = Manufacturer.order(:manufacturer_name)
-    # @carModels = CarModel.all
-
     @manufacturers = Manufacturer.order(:manufacturer_name)
-    @selected_letter = params[:letter]&.upcase
 
-    if @selected_letter.present?
-      @manufacturers = @manufacturers.where("UPPER(SUBSTR(manufacturers.manufacturer_name, 1, 1)) = ?", @selected_letter)
-                                      .order(:manufacturer_name)
-
-      @no_entries_message = "Sorry, there are no entries for the listed letter." if @manufacturers.empty?
-    else
-      @manufacturers = @manufacturers.page(params[:page]).per(10) # Adjust the per value as per your requirement
+    if params[:letter].present?
+      @selected_letter = params[:letter].upcase
+      @manufacturers = @manufacturers.where("UPPER(manufacturer_name) LIKE ?", "#{@selected_letter}%")
     end
+    @manufacturers = @manufacturers.page(params[:page]).per(10)
   end
 
   def show
