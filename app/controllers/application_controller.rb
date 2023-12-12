@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   def set_breadcrumbs
     return if is_active_admin_page?
+    return if devise_controller?
 
     add_breadcrumb 'Home', :root_path
 
