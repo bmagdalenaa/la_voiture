@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  root "home#index"
 
+  devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
   resources :home, only: %i[index]
   resources :provinces, only: %i[index show]
   resources :color, only: %i[index show]
@@ -16,5 +18,7 @@ Rails.application.routes.draw do
   resources :vehicle, only: %i[index show]
   resources :abouts
   resources :contacts
-  root "home#index"
+
+  get 'search', to: 'searches#search', as: :search
+
 end

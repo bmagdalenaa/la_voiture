@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   def set_breadcrumbs
     return if is_active_admin_page?
     return if devise_controller?
+    return if controller_path == 'searches'
 
     add_breadcrumb 'Home', :root_path
 
@@ -30,12 +31,12 @@ class ApplicationController < ActionController::Base
     request.path.start_with?('/admin')
   end
 
-  # Helper to generate path for the controller's index action
+  # Helper to generate path for the controller's index action - manufacturer
   def controller_index_path
     url_for(controller: controller_name, action: :index)
   end
 
-  # Helper to generate path for the current action
+  # Helper to generate path for the current action - manufacturer > show
   def action_path
     url_for(controller: controller_name, action: action_name)
   end
