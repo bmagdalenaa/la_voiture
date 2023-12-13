@@ -1,0 +1,16 @@
+<% if @selection == "" %>
+  <p>Car models found when searching for: <%= params[:keywords] %></p>
+  <ul>
+    <% @car_models.each do |car| %>
+      <li><%= link_to car_model.car_model_name, car_model %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <ul>
+    <% @car_models.each do |car| %>
+      <% if car_model.id == @selection.to_i %>
+        <li><%= link_to car_model.car_model_name, car_model %></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

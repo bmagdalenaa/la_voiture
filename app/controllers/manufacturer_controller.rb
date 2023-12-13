@@ -14,4 +14,11 @@ class ManufacturerController < ApplicationController
     @carModel = CarModel.all.where("manufacturer_id" == @manufacturer)
     # @carModels = CarModel.where(manufacturer_id: @manufacturer.id)
   end
+
+  def search
+    @wildcard_search = "%#{params[:keywords]}%"
+    @selection = params[:selection]
+    # @car_models = CarModel.where("car_model_name LIKE ?", @wildcard_search)
+    @manufacturers = Manufacturer.where(" manufacturer_name LIKE ?", @wildcard_search)
+  end
 end

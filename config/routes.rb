@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'searches/search'
   root "home#index"
 
   devise_for :users
@@ -19,6 +20,15 @@ Rails.application.routes.draw do
   resources :abouts
   resources :contacts
 
-  get 'search', to: 'searches#search', as: :search
+  resources :car_models, only: %i[index show] do
+    collection do
+      get 'search', to: 'car_models#search', as: 'search'  # This will give you a path to car_models/search
+    end
+  end
 
+  resources :manufacturers, only: %i[index show] do
+    collection do
+      get 'search', to: 'manufacturers#search', as: 'search'  # This will give you a path to manufacturers/search
+    end
+  end
 end

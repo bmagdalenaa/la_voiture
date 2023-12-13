@@ -1,44 +1,53 @@
+
 <div class="container mt-5">
-  <h1 class="fw-bold mb-4">Car Models</h1>
-
-  <div class="mb-3">
-    <p class="lead">
-     Use the buttons below to filter car models alphabetically or by numbers.
-      Click on a letter or 'All' to view car models starting with that letter. Click 'All Numbers' to see car models with numbers.
-    </p>
-
-    <div class="btn-group" role="group" aria-label="Filter by Letter">
-      <a href="<%= car_models_path %>" class="btn <%= 'active' unless params[:letter].present? %>">All</a>
-      <% ('A'..'Z').each do |letter| %>
-        <a href="<%= car_models_path(letter: letter) %>" class="btn <%= 'active' if params[:letter] == letter %>"><%= letter %></a>
-      <% end %>
-    </div>
-
-    <div class="btn-group" role="group" aria-label="Filter by Number">
-      <a href="<%= car_models_path(number: '0-9') %>" class="btn <%= 'active' if params[:number] == '0-9' %>">All Numbers</a>
-    </div>
+<h1 class="fw-bold mb-4">Car Models</h1>
+  <div class="lead">
+    <p>Discover your preferred car models by selecting from the list, filtering by alphabet, searching by name, or narrowing down by manufacturer. Utilize the alphabet filters for a quick jump to models starting with a specific letter, the search box to find a model by name, or the dropdown menu to see models from a selected manufacturer.</p>
   </div>
 
-  <% if @no_entries_message %>
+  <% if @car_models.empty? %>
     <div class="alert alert-warning">
-      <%= @no_entries_message %>
+      Sorry, there are no results matching your criteria, please try again.
     </div>
   <% end %>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <% @car_models.each do |car_model| %>
-      <div class="col">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to car_model.car_model_name, car_model, class: 'text-decoration-none text-dark' %></h5>
-            <p class="card-text">Some description about the car model.<%= car_model.description %></p>
-          </div>
-        </div>
-      </div>
+  <div class="btn-group" role="group" aria-label="Filter by Letter">
+    <a href="<%= car_models_path %>" class="btn <%= 'active' unless params[:letter].present? %>">All</a>
+    <% ('A'..'Z').each do |letter| %>
+      <a href="<%= car_models_path(letter: letter) %>" class="btn <%= 'active' if params[:letter] == letter %>"><%= letter %></a>
     <% end %>
   </div>
-
-  <div class="mt-3">
-    <%= paginate @car_models %>
+  <div class="btn-group" role="group" aria-label="Filter by Number">
+    <a href="<%= car_models_path(number: '0-9') %>" class="btn <%= 'active' if params[:number] == '0-9' %>">All Numbers</a>
   </div>
+
+  <div class="navbar navbar-expand-lg"  >
+    <div class="container-fluid ">
+      <%= form_with(url: car_models_path, method: :get, local: true, class: 'd-flex justify-content-center') do |form| %>
+        <%= form.collection_select :manufacturer_id, @manufacturers, :id, :manufacturer_name, include_blank: 'All Manufacturers', class: 'form-control' %>
+        <%= form.text_field :query, placeholder: 'Search...',class: 'form-control' %>
+        <%= form.submit 'Search', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% @car_models.each do |car_model| %>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to car_model.car_model_name, car_model, class: 'text-decoration-none text-dark' %></h5>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% unless @car_models.empty? %>
+    <div class="mt-3">
+      <%= paginate @car_models %>
+    </div>
+  <% end %>
 </div>
