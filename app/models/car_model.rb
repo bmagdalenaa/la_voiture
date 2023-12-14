@@ -12,5 +12,13 @@ class CarModel < ApplicationRecord
 
   validates :manufacturer_id, presence: true, numericality: { only_integer: true }
 
+  def self.global_search(query)
+    if query.present?
+      where("car_model_name LIKE ?", "%#{query}%")
+    else
+      all
+    end
+  end
+
   # validates :description, presence: true
 end
