@@ -23,6 +23,12 @@ class CarModelsController < ApplicationController
     @car_models = @car_models.order(:car_model_name).page(params[:page]).per(10)
   end
 
+  def show
+    @carModel = CarModel.find(params[:id])
+    @manufacturer = Manufacturer.all.where("manufacturer_id" == @manufacturer)
+    # @carModels = CarModel.where(manufacturer_id: @manufacturer.id)
+  end
+
   private
 
   def self.global_search(query)
