@@ -1,20 +1,24 @@
 <h2>Search Results</h2>
- <div class="container mt-3">
-  <% if @results[:car_models].any? %>
+<div class="container mt-3">
+  <% if @category.blank? || @category == 'car_models' %>
     <h3>Car Models</h3>
-    <% @results[:car_models].each do |car_model| %>
-      <p><%= link_to car_model.car_model_name, car_model_path(car_model) %></p>
-
+    <% if @results[:car_models].any? %>
+      <% @results[:car_models].each do |car_model| %>
+        <p><%= link_to car_model.car_model_name, car_model_path(car_model) %></p>
+      <% end %>
+    <% else %>
+      <p>No car models found.</p>
     <% end %>
-  <% else %>
-    <p>No car models found.</p>
   <% end %>
 
-  <% if @results[:manufacturers].any? %>
+  <% if @category.blank? || @category == 'manufacturers' %>
     <h3>Manufacturers</h3>
-    <% @results[:manufacturers].each do |manufacturer| %>
-      <p><%= link_to manufacturer.manufacturer_name, manufacturer_path(manufacturer) %></p>
+    <% if @results[:manufacturers].any? %>
+      <% @results[:manufacturers].each do |manufacturer| %>
+        <p><%= link_to manufacturer.manufacturer_name, manufacturer_path(manufacturer) %></p>
+      <% end %>
+    <% else %>
+      <p>No manufacturers found.</p>
     <% end %>
-  <% else %>
-    <p>No manufacturers found.</p>
   <% end %>
+</div>
