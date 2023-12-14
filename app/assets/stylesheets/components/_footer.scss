@@ -1,0 +1,56 @@
+// Variables
+$footer-background-color: #f8f9fa; // Variable for background color
+$footer-text-color: #343a40;       // Variable for text color
+$footer-link-color: #007bff;       // Variable for link color
+$margin-right-li: 15px;            // Variable for right margin of list item
+
+// Inheritance
+%footer-text {
+  font-size: 0.875rem; // Inheritance of text styles
+  color: $footer-text-color;
+}
+
+// Footer container with nesting
+.footer-container {
+  background-color: $footer-background-color; // Variables
+  padding: 0;
+  margin: 0;
+
+  // Nested ul
+  .footer-content {
+    ul {
+      padding-left: 0; // Operators (addition/subtraction/multiplication/division) could be added here if needed
+      list-style: none;
+      text-align: center;
+
+      // Nested li
+      li {
+        display: inline-block;
+        margin-right: $margin-right-li; // Operator (used variable for margin)
+
+        // Nested pseudo-class :last-child
+        &:last-child {
+          margin-right: 0; // Operator (used variable for margin)
+        }
+
+        // Nested anchor tag with &:hover pseudo-class
+        a {
+          color: $footer-link-color; // Variables
+          text-decoration: none;
+
+          // Hover state with operator
+          &:hover {
+            color: darken($footer-link-color, 40%); // Operator (darken function)
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    // p with inheritance
+    p {
+      @extend %footer-text; // Inheritance (extend placeholder selector)
+      margin-bottom: 0;
+    }
+  }
+}
