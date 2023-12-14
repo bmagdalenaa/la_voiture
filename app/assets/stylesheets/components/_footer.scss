@@ -1,0 +1,45 @@
+$footer-background-color: #f8f9fa;
+$footer-text-color: #343a40;
+$footer-link-color: #007bff;
+
+%footer-text {
+  font-size: 0.875rem;
+  color: $footer-text-color;
+}
+
+.footer-container {
+  background-color: $footer-background-color;
+  padding: 0;
+  margin: 0;
+
+  .footer-content {
+    ul {
+      padding-left: 0;
+      list-style: none;
+      text-align: center;
+
+      li {
+        display: inline-block;
+        margin-right: 15px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        a {
+          color: $footer-link-color;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    p {
+      @extend %footer-text;
+      margin-bottom: 0;
+    }
+  }
+}
