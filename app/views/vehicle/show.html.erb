@@ -1,2 +1,17 @@
-<h1>Vehicle#show</h1>
-<p>Find me in app/views/vehicle/show.html.erb</p>
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h1><%= @vehicle.vehicle_name %></h1>
+    </div>
+    <div class="card-body">
+      <p><strong>Year:</strong> <%= @vehicle.vehicle_year %></p>
+      <p><strong>Price:</strong> <%= number_to_currency(@vehicle.vehicle_price) %></p>
+      <p><strong>VIN:</strong> <%= @vehicle.vin_identification %></p>
+      <p><strong>Color:</strong> <%= @vehicle.color.color_name %></p>
+      <p><strong>Fuel Type:</strong> <%= @vehicle.fuel.fuel_name %></p>
+      <p><strong>Type:</strong> <%= @vehicle.type.type_name %></p>
+    </div>
+  </div>
+</div>
+

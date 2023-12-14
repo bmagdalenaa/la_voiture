@@ -7,6 +7,12 @@ class ManufacturerController < ApplicationController
       @manufacturers = @manufacturers.where("UPPER(manufacturer_name) LIKE ?", "#{@selected_letter}%")
     end
     @manufacturers = @manufacturers.page(params[:page]).per(10)
+
+    if params[:letter].present?
+      @selected_letter = params[:letter].upcase
+      @manufacturers = @manufacturers.where("UPPER(manufacturer_name) LIKE ?", "#{@selected_letter}%")
+    end
+    @manufacturers = @manufacturers.page(params[:page]).per(10)
   end
 
   def show

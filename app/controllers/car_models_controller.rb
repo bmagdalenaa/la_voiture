@@ -1,26 +1,35 @@
 class CarModelsController < ApplicationController
+  before_action :load_manufacturers, only: [:index]
+
   def index
-    @manufacturers = Manufacturer.all
-    @selected_letter = params[:letter]&.upcase
-    @selected_number = params[:number]
+    @car_models = CarModel.all
+    @no_entries_message = 'Sorry, there are no entries for the listed letter.' if @car_models.empty?
 
-    if @selected_letter.present?
-      @car_models = CarModel.where("UPPER(SUBSTR(car_model_name, 1, 1)) = ?", @selected_letter)
-                          .order(:car_model_name)
-    elsif @selected_number.present? && @selected_number != 'all_numbers'
-      @car_models = CarModel.where("UPPER(SUBSTR(car_model_name, 1, 1)) IN ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9') OR car_model_name LIKE ?", "#{@selected_number}%")
-                          .order(:car_model_name)
+    if params[:manufacturer_id].present? || params[:query].present?
+      # Filters by manufacturer if selected
+      @car_models = @car_models.where(manufacturer_id: params[:manufacturer_id]) if params[:manufacturer_id].present?
+
+      # Filters by car model name if a keyword is given
+      @car_models = @car_models.where('car_model_name LIKE ?', "%#{params[:query]}%") if params[:query].present?
     else
-      @car_models = CarModel.order(:car_model_name)
+      # If no search bar input is given, use the alphabetical/All filter
+      if params[:letter].present?
+        selected_letter = params[:letter].upcase
+        @car_models = @car_models.where('UPPER(car_model_name) LIKE ?', "#{selected_letter}%")
+      elsif params[:number] == 'all_numbers'
+        @car_models = @car_models.where('car_model_name RLIKE ?', '^[0-9]')
+      end
     end
-
-    @car_models = @car_models.page(params[:page]).per(10) # Adjust the per value as per your requirement
-
-    @no_entries_message = "Sorry, there are no entries for the listed letter." if @car_models.empty?
+    @car_models = @car_models.order(:car_model_name).page(params[:page]).per(10)
   end
 
-  def show
-    @carModel = CarModel.find(params[:id])
-    @manufacturer = Manufacturer.find(@carModel.manufacturer_id)
+  private
+
+  def self.global_search(query)
+    where("car_model_name LIKE ?", "%#{query}%") if query.present?
+  end
+
+  def load_manufacturers
+    @manufacturers = Manufacturer.all
   end
 end

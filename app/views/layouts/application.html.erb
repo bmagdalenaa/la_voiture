@@ -15,8 +15,14 @@
   <body class="bg-light">
     <section class="section">
       <%= render partial: 'layouts/components/menu' %>
+      <div class="container mt-1">
+        <%= render_breadcrumbs %>
+      </div>
       <%= yield %>
     </section>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
     <footer class="py-4 bg-light">
       <%= render partial: 'layouts/components/footer' %>
