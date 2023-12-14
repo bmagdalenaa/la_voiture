@@ -31,4 +31,15 @@ Rails.application.routes.draw do
       get 'search', to: 'manufacturers#search', as: 'search'  # This will give you a path to manufacturers/search
     end
   end
+
+  resources :cart, only: [:show] do
+    member do
+      post :add
+      patch :update
+      delete :remove
+    end
+  end
+
+  resources :checkout, only: [:create]
+
 end

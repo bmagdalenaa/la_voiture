@@ -54,11 +54,14 @@ gem 'devise'
 # Use fakerjs
 gem 'faker'
 
-# Use pagination
+# Pagination
 gem 'kaminari'
 
 # Breadcrumbs
 gem 'breadcrumbs_on_rails'
+
+# Stripe
+gem 'stripe'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
