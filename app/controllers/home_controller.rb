@@ -7,5 +7,7 @@ class HomeController < ApplicationController
       OpenStruct.new(model: 'Placeholder Model 3', image_url: 'nissan-placeholder.jpg', description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'),
       OpenStruct.new(model: 'Placeholder Model 4', image_url: 'nissan-placeholder.jpg', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
     ]
+
+    @vehicles = Vehicle.all
   end
 end

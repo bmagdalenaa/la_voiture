@@ -18,19 +18,19 @@
 <section class="py-5">
   <div class="container px-4 px-lg-5 mt-5">
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-      <% @featured_vehicles.each do |vehicle| %>
+      <% @vehicles.each do |vehicle| %>
         <div class="col mb-5">
           <div class="card h-100">
-            <%= link_to vehicle_index_path(vehicle) do %>
-              <%= image_tag(vehicle.image_url, alt: vehicle.model, class: 'card-img-top') %>
+            <%= link_to vehicle_path(vehicle) do %>
+              <%= image_tag vehicle.image.variant(resize_to_limit:[269, 269]) %>
             <% end %>
             <!-- Vehicle details placerholder -->
             <div class="card-body p-4">
               <div class="text-center">
                 <!-- Vehicle name placeholder -->
-                <h5 class="fw-bolder"><%= vehicle.model %></h5>
+                <h5 class="fw-bolder"><%= vehicle.car_models_id %></h5>
                 <!-- Vehicle price placeholder-->
-                <%= number_to_currency(vehicle.price, precision: 0) %>
+                <%= number_to_currency(vehicle.vehicle_price, precision: 0) %>
               </div>
             </div>
             <!-- Vehicle actions placeholder -->
