@@ -34,12 +34,6 @@ car_data = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
 car_data.each do |c|
   manufacturer = Manufacturer.find_or_create_by(manufacturer_name: c["manufacturer_name"])
-end
-
-car_data.each do |c|
-  manufacturer = Manufacturer.find_or_create_by(manufacturer_name: c["manufacturer_name"])
-car_data.each do |c|
-  manufacturer = Manufacturer.find_or_create_by(manufacturer_name: c["manufacturer_name"])
 
   # Find or create the car model with the manufacturer_id
   # car_model = CarModel.find_or_create_by(
