@@ -1,18 +1,24 @@
 <div class="container mt-5">
-  <h1 class="mb-4"><%= @manufacturer.manufacturer_name %></h1>
+  <% if @manufacturer.image.present? %>
+    <h1 class="mb-4"><%= image_tag @manufacturer.image.variant(resize_to_limit:[100, 100]) %> <%= @manufacturer.manufacturer_name %></h1>
+  <% else %>
+    <h1 class="mb-4"><%= @manufacturer.manufacturer_name %></h1>
+  <% end %>
 
   <h2 class="mb-3">Models:</h2>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @carModel.each do |car_model| %>
-      <div class="col">
-        <div class="card h-100">
-            <%= image_tag 'coming-soon.jpg', class: "card-img-top", alt: "Coming soon" %>
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to car_model.car_model_name, car_model %></h5>
+      <% if car_model.manufacturer_id == @manufacturer.id %>
+        <div class="col">
+          <div class="card h-100">
+              <%= image_tag 'coming-soon.jpg', class: "card-img-top", alt: "Coming soon" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to car_model.car_model_name, car_model %></h5>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
