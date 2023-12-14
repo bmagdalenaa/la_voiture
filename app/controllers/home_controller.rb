@@ -9,5 +9,7 @@ class HomeController < ApplicationController
     ]
 
     @vehicles = Vehicle.all
+    @car_models = CarModel.all
+    @car_model = CarModel.all.where("car_models_id" == @car_model)
   end
 end
