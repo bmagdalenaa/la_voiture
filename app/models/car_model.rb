@@ -3,6 +3,7 @@ class CarModel < ApplicationRecord
     self.car_model_name
   end
   belongs_to :manufacturer
+  has_one_attached :image
 
   validates :car_model_name, presence: true
   validates :car_model_name, uniqueness: true
