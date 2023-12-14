@@ -25,6 +25,10 @@ class CarModelsController < ApplicationController
 
   private
 
+  def self.global_search(query)
+    where("car_model_name LIKE ?", "%#{query}%") if query.present?
+  end
+
   def load_manufacturers
     @manufacturers = Manufacturer.all
   end

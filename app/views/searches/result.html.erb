@@ -1,0 +1,11 @@
+<h2>Search Results</h2>
+<% if @results[:car_models].any? %>
+  <h3>Car Models</h3>
+  <% @results[:car_models].each do |car_model| %>
+  <% end %>
+<% end %>
+<% if @results[:manufacturers].any? %>
+  <h3>Manufacturers</h3>
+  <% @results[:manufacturers].each do |manufacturer| %>
+  <% end %>
+<% end %>
