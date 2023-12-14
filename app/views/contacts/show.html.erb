@@ -1,23 +1,2 @@
-<div class="container mt-5">
-  <h2 class="fw-bold mb-4">Contact Us</h2>
-
-  <div class="row">
-    <div class="col-md-6">
-      <p><strong>Your Name:</strong> <%= @contact.name %></p>
-      <p><strong>Email address:</strong> <%= @contact.email %></p>
-      <p><strong>Your Message:</strong> <%= @contact.message %></p>
-    </div>
-
-    <div class="col-md-5">
-      <h4 class="fw-bold mb-3">Our Location</h4>
-      <p>La Voiture Inc.</p>
-      <p>123 Main Street</p>
-      <p>Winnipeg, Manitoba</p>
-      <p>Canada</p>
-
-      <h4 class="fw-bold mt-4 mb-3">Contact Information</h4>
-      <p>Email: info@lavoiture.com</p>
-      <p>Phone: +1 (204) 123-4567</p>
-    </div>
-  </div>
-</div>
+<% @contact_page = ContactPage.first %>
+<%= @contact_page.content.html_safe %>
