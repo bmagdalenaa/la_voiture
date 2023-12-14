@@ -1,11 +1,20 @@
 <h2>Search Results</h2>
-<% if @results[:car_models].any? %>
-  <h3>Car Models</h3>
-  <% @results[:car_models].each do |car_model| %>
+ <div class="container mt-3">
+  <% if @results[:car_models].any? %>
+    <h3>Car Models</h3>
+    <% @results[:car_models].each do |car_model| %>
+      <p><%= car_model.car_model_name %></p>
+    <% end %>
+  <% else %>
+    <p>No car models found.</p>
   <% end %>
-<% end %>
-<% if @results[:manufacturers].any? %>
-  <h3>Manufacturers</h3>
-  <% @results[:manufacturers].each do |manufacturer| %>
+
+  <% if @results[:manufacturers].any? %>
+    <h3>Manufacturers</h3>
+    <% @results[:manufacturers].each do |manufacturer| %>
+      <p><%= link_to manufacturer.manufacturer_name, manufacturer_path(manufacturer) %></p>
+    <% end %>
+  <% else %>
+    <p>No manufacturers found.</p>
   <% end %>
-<% end %>
+<div class="container mt-5">

@@ -15,10 +15,6 @@ class ManufacturerController < ApplicationController
     # @carModels = CarModel.where(manufacturer_id: @manufacturer.id)
   end
 
-  def self.global_search(query)
-    where("name LIKE ?", "%#{query}%") if query.present?
-  end
-
   def search
     @wildcard_search = "%#{params[:keywords]}%"
     @selection = params[:selection]
