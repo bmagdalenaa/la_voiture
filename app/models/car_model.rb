@@ -2,6 +2,8 @@ class CarModel < ApplicationRecord
   def to_s
     self.car_model_name
   end
+
+  has_many :vehicles
   belongs_to :manufacturer
   has_one_attached :image
 
