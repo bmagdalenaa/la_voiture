@@ -1,10 +1,12 @@
-<h1><%= @carModel.car_model_name%></h1>
+<h1><%= @carModel.car_model_name %></h1>
 
-<% @manufacturer.each do |c| %>
-  <% if c.id == @carModel.manufacturer_id%>
-    <h3>Manufacturer: <%= link_to c.manufacturer_name, c %></h3>
+<h3><%= link_to @manufacturer.manufacturer_name, @manufacturer %></h3>
+
+<div class="title">
+  <% if @carModel.image.present? %>
+    <h1><%= image_tag @carModel.image.variant(resize_to_limit:[250, 250]) %>
   <% end %>
-<% end %>
+</div>
 
 <p><%= @carModel.description %></p>
 

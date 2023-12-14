@@ -5,7 +5,7 @@ ActiveAdmin.register Manufacturer do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :manufacturer_name
+  permit_params :manufacturer_name, :image
   #
   # or
   #
@@ -14,4 +14,12 @@ ActiveAdmin.register Manufacturer do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  form do |f|
+    f.semantic_errors
+    f.inputs
+    f.inputs do
+      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image, size: '50x50') : ''
+    end
+    f.actions
+  end
 end

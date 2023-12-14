@@ -1,4 +1,10 @@
-<h1><%= @manufacturer.manufacturer_name%></h1>
+<div class="title">
+  <% if @manufacturer.image.present? %>
+    <h1><%= image_tag @manufacturer.image.variant(resize_to_limit:[100, 100]) %> <%= @manufacturer.manufacturer_name %></h1>
+  <% else %>
+    <h1><%= @manufacturer.manufacturer_name %></h1>
+  <% end %>
+</div>
 
 <h2>Models:</h2>
 
