@@ -26,7 +26,6 @@ class CarModelsController < ApplicationController
   def show
     @carModel = CarModel.find(params[:id])
     @manufacturer = Manufacturer.all.where("manufacturer_id" == @manufacturer)
-    # @carModels = CarModel.where(manufacturer_id: @manufacturer.id)
   end
 
   private

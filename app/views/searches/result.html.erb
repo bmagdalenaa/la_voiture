@@ -3,7 +3,8 @@
   <% if @results[:car_models].any? %>
     <h3>Car Models</h3>
     <% @results[:car_models].each do |car_model| %>
-      <p><%= car_model.car_model_name %></p>
+      <p><%= link_to car_model.car_model_name, car_model_path(car_model) %></p>
+
     <% end %>
   <% else %>
     <p>No car models found.</p>
