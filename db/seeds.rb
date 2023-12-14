@@ -20,6 +20,10 @@ unless AdminUser.exists?(email: 'admin@example.com')
   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 end
 
+# About and Contact pages
+AboutPage.create!(content: 'Initial content for about us')
+ContactPage.create!(content: 'Initial content for contact page')
+
 # Import data from a csv file to Manufacturer table
 filename_car = Rails.root.join("db/car_data.csv")
 puts "Loading Cars from the CSV file: #{filename_car}"

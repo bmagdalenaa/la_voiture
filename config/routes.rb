@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   resources :order_details, only: %i[index show]
   resources :type, only: %i[index show]
   resources :vehicle, only: %i[index show]
-  resources :abouts
-  resources :contacts
+
+  get '/about', to: 'abouts#show', as: :about
+  get '/contact', to: 'contacts#show', as: :contact
   get 'search', to: 'searches#result', as: 'global_search'
 
   resources :car_models, only: %i[index show] do

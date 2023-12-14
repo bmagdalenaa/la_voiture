@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_12_045204) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_14_093255) do
+  create_table "about_pages", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -90,6 +96,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_045204) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "contact_pages", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fuels", force: :cascade do |t|
     t.string "fuel_name"
     t.datetime "created_at", null: false
@@ -138,20 +150,34 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_045204) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   create_table "vehicles", force: :cascade do |t|
     t.string "vehicle_name"
     t.float "vehicle_price"
     t.string "vin_identification"
-    t.integer "vehicle_year"
     t.integer "type_id", null: false
-    t.integer "car_models_id", null: false
+    t.integer "model_id", null: false
     t.integer "fuel_id", null: false
+    t.integer "order_details_id", null: false
     t.integer "color_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["car_models_id"], name: "index_vehicles_on_car_models_id"
+    t.integer "vehicle_year"
     t.index ["color_id"], name: "index_vehicles_on_color_id"
     t.index ["fuel_id"], name: "index_vehicles_on_fuel_id"
+    t.index ["model_id"], name: "index_vehicles_on_model_id"
+    t.index ["order_details_id"], name: "index_vehicles_on_order_details_id"
     t.index ["type_id"], name: "index_vehicles_on_type_id"
   end
 
@@ -161,8 +187,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_045204) do
   add_foreign_key "model_colors", "colors"
   add_foreign_key "model_colors", "models"
   add_foreign_key "order_details", "contact_lists"
-  add_foreign_key "vehicles", "car_models", column: "car_models_id"
   add_foreign_key "vehicles", "colors"
   add_foreign_key "vehicles", "fuels"
+  add_foreign_key "vehicles", "models"
+  add_foreign_key "vehicles", "order_details", column: "order_details_id"
   add_foreign_key "vehicles", "types"
 end
