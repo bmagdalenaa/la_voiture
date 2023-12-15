@@ -1,0 +1,13 @@
+<h1>Cart</h1>
+<% if cart.present? %>
+  <h2>You have <%= pluralize cart.size, "product" %> in your cart.</h2>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <% cart.each do |vehicle| %>
+      <li class="nav-item">
+        <%= link_to vehicle.vehicle_name, vehicle %>
+        <%= number_to_currency(vehicle.vehicle_price, precision: 0) %>
+        <%= button_to "Remove", cart_path(vehicle), method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

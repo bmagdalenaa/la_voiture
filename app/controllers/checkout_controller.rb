@@ -2,6 +2,20 @@ class CheckoutController < ApplicationController
   before_action :authenticate_user!
   before_action :set_cart
 
+  def index
+    @contact_lists = ContactList.all
+    @provinces = Province.all
+    @order_details = OrderDetail.all
+    @vehicles = Vehicle.all
+  end
+
+  def show
+    @contact_list = ContactList.find(params[:id])
+    @province = Province.find(params[:id])
+    @order_detail = OrderDetail.find(params[:id])
+    @vehicle = Vehicle.find(params[:id])
+  end
+
   def create
     province = current_user.province
     tax_rate_id = retrieve_or_create_stripe_tax_rate(province)
@@ -9,8 +23,8 @@ class CheckoutController < ApplicationController
     line_items = @cart.map do |vehicle_id, quantity|
       vehicle = Vehicle.find(vehicle_id)
       {
-        name: vehicle.model.name,
-        amount: vehicle.price_cents * quantity, # Total amount in cents..... need to create cents
+        name: vehicle.vehicle_name,
+        amount: vehicle.vehicle_price * quantity, # Total amount in cents..... need to create cents
         currency: 'cad',
         quantity: 1,
         tax_rates: [tax_rate_id]
@@ -63,12 +77,12 @@ class CheckoutController < ApplicationController
   end
 
   # construct the success and cancel URLs later.
-  def checkout_success_url
+  def checkout_success
     # Replace with the actual URL helper for the success route.
     root_url
   end
 
-  def checkout_cancel_url
+  def checkout_cancel
     # Replace with the actual URL helper for the cancel route.
     root_url
   end

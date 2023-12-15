@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get '/about', to: 'abouts#show', as: :about
   get '/contact', to: 'contacts#show', as: :contact
+  resources :cart
+  resources :checkout, only: %i[index]
   get 'search', to: 'searches#result', as: 'global_search'
 
   resources :car_models, only: %i[index show] do
@@ -35,14 +37,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :cart, only: [:show] do
-    member do
-      post :add
-      patch :update
-      delete :remove
-    end
-  end
+  # resources :cart, only: [:show] do
+  #   member do
+  #     post :add
+  #     patch :update
+  #     delete :remove
+  #   end
+  # end
 
-  resources :checkout, only: [:create]
+  # resources :checkout, only: [:create]
+  # scope "/checkout" do
+  #   post "create", to: "checkout#create", as: "checkout_create"
+  #   get "success", to: "checkout#success", as: "checkout_success"
+  #   get "cancel", to: "checkout#cancel", as: "checkout_cancel"
+  # end
 
 end

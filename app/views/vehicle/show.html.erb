@@ -11,6 +11,16 @@
       <p><strong>Color:</strong> <%= @vehicle.color.color_name %></p>
       <p><strong>Fuel Type:</strong> <%= @vehicle.fuel.fuel_name %></p>
       <p><strong>Type:</strong> <%= @vehicle.type.type_name %></p>
+      <% if cart.include?(@vehicle) %>
+        <%= button_to cart_path(@vehicle), method: :delete do %>
+          Remove From Cart
+        <% end %>
+      <% else %>
+        <%= form_with  url: cart_index_path, method: :post do %>
+          <%= hidden_field_tag(:id, @vehicle.id) %>
+          <%= button_tag '+ Add to Cart' %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>

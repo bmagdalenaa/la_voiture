@@ -2,6 +2,25 @@ class CartController < ApplicationController
   before_action :authenticate_user!
   before_action :initialize_cart
 
+  def create
+    logger.debug("adding #{params[:id]} to cart.")
+    id = params[:id].to_i
+    session[:cart] << id unless session[:cart].include?(id)
+    redirect_to root_path
+  end
+
+  def destroy
+    id = params[:id].to_i
+    session[:cart].delete(id)
+    vehicle = Vehicle.find(id)
+    flash[:notice] = " #{vehicle.vehicle_name} removed from cart."
+    redirect_to root_path
+  end
+
+  def index
+
+  end
+
   private
 
   def initialize_cart

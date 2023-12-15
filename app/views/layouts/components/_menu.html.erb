@@ -29,6 +29,9 @@
         <%= link_to "Log in", new_user_session_path, class: "btn btn-light ms-1" %> |
         <%= link_to "Sign up", new_user_registration_path, class: "btn btn-light ms-1" %>
       <% end %>
+      <ul class="navbar-nav me-auto ">
+        <li class="nav-item"><%= link_to "🛒", cart_index_path, class: "nav-link" %><sup><%= cart.size %></sup></li>
+      </ul>
     </div>
   </div>
 </nav>
