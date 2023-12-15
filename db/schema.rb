@@ -158,24 +158,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_15_104611) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "address"
-    t.integer "province_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["province_id"], name: "index_users_on_province_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "vehicles", force: :cascade do |t|
     t.string "vehicle_name"
-    t.float "vehicle_price"
+    t.integer "vehicle_price"
     t.string "vin_identification"
+    t.integer "vehicle_year"
     t.integer "type_id", null: false
+    t.integer "car_models_id", null: false
     t.integer "fuel_id", null: false
     t.integer "color_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "vehicle_year"
-    t.integer "car_models_id"
+    t.index ["car_models_id"], name: "index_vehicles_on_car_models_id"
     t.index ["color_id"], name: "index_vehicles_on_color_id"
     t.index ["fuel_id"], name: "index_vehicles_on_fuel_id"
     t.index ["type_id"], name: "index_vehicles_on_type_id"
@@ -187,7 +185,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_15_104611) do
   add_foreign_key "model_colors", "colors"
   add_foreign_key "model_colors", "models"
   add_foreign_key "order_details", "contact_lists"
-  add_foreign_key "users", "provinces"
+  add_foreign_key "vehicles", "car_models", column: "car_models_id"
   add_foreign_key "vehicles", "colors"
   add_foreign_key "vehicles", "fuels"
   add_foreign_key "vehicles", "types"
