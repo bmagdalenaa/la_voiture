@@ -7,7 +7,7 @@ Manufacturer.destroy_all
 Color.delete_all
 Fuel.delete_all
 Type.delete_all
-Province.delete_all
+# Province.destroy_all
 
 # Reseed ids
 ActiveRecord::Base.connection.execute(
@@ -16,22 +16,22 @@ ActiveRecord::Base.connection.execute(
 )
 
 # Import data from a csv file to Province table
-filename = Rails.root.join("db/provinces_data.csv")
-puts "Loading Provinces from the CSV file: #{filename}"
-csv_data = File.read(filename)
-provinces = CSV.parse(csv_data, headers: true, encoding: "utf-8")
+# filename = Rails.root.join("db/provinces_data.csv")
+# puts "Loading Provinces from the CSV file: #{filename}"
+# csv_data = File.read(filename)
+# provinces = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
-provinces.each do |row|
-  Province.create(
-    province_name: row["province_name"],
-    pst: row["pst"].presence || 0.0,
-    gst: row["gst"].presence || 0.0,
-    hst: row["hst"].presence || 0.0,
-    total_tax_rate: row["total_tax_rate"].presence || 0.0
-  )
-end
+# provinces.each do |row|
+#   Province.create(
+#     province_name: row["province_name"],
+#     pst: row["pst"].presence || 0.0,
+#     gst: row["gst"].presence || 0.0,
+#     hst: row["hst"].presence || 0.0,
+#     total_tax_rate: row["total_tax_rate"].presence || 0.0
+#   )
+# end
 
-puts "Created #{Province.count} provinces."
+# puts "Created #{Province.count} provinces."
 
 # Admin credentials
 unless AdminUser.exists?(email: 'admin@example.com')
@@ -49,9 +49,9 @@ csv_data = File.read(filename_car)
 
 car_data = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
-car_data.each do |c|
-  manufacturer = Manufacturer.find_or_create_by(manufacturer_name: c["manufacturer_name"])
-end
+# car_data.each do |c|
+#   manufacturer = Manufacturer.find_or_create_by(manufacturer_name: c["manufacturer_name"])
+# end
 
 car_data.each do |c|
   manufacturer = Manufacturer.find_or_create_by(manufacturer_name: c["manufacturer_name"])
