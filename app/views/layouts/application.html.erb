@@ -18,11 +18,17 @@
       <div class="container mt-1">
         <%= render_breadcrumbs %>
       </div>
+      <div>
+        <!-- flash message  -->
+        <% flash.each do |type, message| %>
+          <div class="alert alert-<%= type %> alert-dismissible fade show" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+      </div>
       <%= yield %>
     </section>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
     <footer class="py-4 bg-light">
       <%= render partial: 'layouts/components/footer' %>

@@ -1,4 +1,5 @@
 class AboutsController < ApplicationController
-  def index
+  def show
+    @about_page = AboutPage.first
   end
 end

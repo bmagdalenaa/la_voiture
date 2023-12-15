@@ -9,26 +9,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "About", abouts_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Car Models", car_models_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Manufacturers", manufacturer_index_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Contact us", contacts_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Contact us", contact_path , class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Admin", admin_root_path, class: "nav-link" %></li>
       </ul>
-      <section class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <%= form_with(url: global_search_path, method: :get, class: 'd-flex') do %>
-            <%= text_field_tag :query, params[:query], placeholder: 'Search...', class: 'form-control me-2' %>
-            <%= submit_tag 'Search', class: 'btn btn-outline-success' %>
-          <% end %>
-        </div>
-      </section>
-    </div>
-     <% if user_signed_in? %>
-        <span class="navbar-text me-2">Welcome <%= current_user.email %></span>
+
+      <%= form_with(url: global_search_path, method: :get, class: 'd-flex') do |form| %>
+        <%= form.text_field :query, value: @query, placeholder: 'Search', class: 'form-control me-2' %>
+        <%= form.select :category, options_for_select([['Car Models', 'car_models'], ['Manufacturers', 'manufacturers']], selected: @category), include_blank: 'All Categories', class: 'form-select me-2' %>
+        <%= form.submit 'Search', class: 'btn btn-primary' %>
+      <% end %>
+
+      <% if user_signed_in? %>
+        <span class="navbar-text me-2"><%= current_user.email %></span>
         <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger ms-1", form_class: "d-inline" %>
       <% else %>
-        <%= button_to "Sign in", new_user_session_path, class: "btn btn-light ms-1", form_class: "d-inline" %>
+        <%= link_to "Log in", new_user_session_path, class: "btn btn-light ms-1" %> |
+        <%= link_to "Sign up", new_user_registration_path, class: "btn btn-light ms-1" %>
       <% end %>
+    </div>
   </div>
 </nav>

@@ -15,10 +15,32 @@ ActiveRecord::Base.connection.execute(
     'colors', 'fuels', 'types', 'provinces', 'manufacturers', 'car_models');"
 )
 
+# Import data from a csv file to Province table
+filename = Rails.root.join("db/provinces_data.csv")
+puts "Loading Provinces from the CSV file: #{filename}"
+csv_data = File.read(filename)
+provinces = CSV.parse(csv_data, headers: true, encoding: "utf-8")
+
+provinces.each do |row|
+  Province.create(
+    province_name: row["province_name"],
+    pst: row["pst"].presence || 0.0,
+    gst: row["gst"].presence || 0.0,
+    hst: row["hst"].presence || 0.0,
+    total_tax_rate: row["total_tax_rate"].presence || 0.0
+  )
+end
+
+puts "Created #{Province.count} provinces."
+
 # Admin credentials
 unless AdminUser.exists?(email: 'admin@example.com')
   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 end
+
+# About and Contact pages
+AboutPage.create!(content: 'Initial content for about us')
+ContactPage.create!(content: 'Initial content for contact page')
 
 # Import data from a csv file to Manufacturer table
 filename_car = Rails.root.join("db/car_data.csv")
@@ -41,26 +63,6 @@ car_data.each do |c|
   )
   # puts "Created Car Model: #{car_model.car_model_name} (Manufacturer: #{manufacturer.manufacturer_name})"
 end
-
-# Import data from a csv file to Province table
-filename = Rails.root.join("db/provinces_data.csv")
-puts "Loading Provinces from the CSV file: #{filename}"
-csv_data = File.read(filename)
-provinces = CSV.parse(csv_data, headers: true, encoding: "utf-8")
-
-provinces.each do |row|
-  # puts "Processing row: #{row.inspect}"
-  # puts "province_name: #{row['province_name']}"
-  Province.create(
-    province_name: row["province_name"],
-    pst: row["pst"].presence || 0.0,
-    gst: row["gst"].presence || 0.0,
-    hst: row["hst"].presence || 0.0,
-    total_tax_rate: row["total_tax_rate"].presence || 0.0
-  )
-end
-
-puts "Created #{Province.count} provinces."
 
 # Colors
 10.times do
