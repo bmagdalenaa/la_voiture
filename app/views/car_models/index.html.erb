@@ -11,14 +11,22 @@
     </div>
   <% end %>
 
-  <div class="btn-group" role="group" aria-label="Filter by Letter">
+  <!-- Desktop layout: horizontal button group -->
+  <div class="btn-group d-none d-md-flex flex-md-wrap mb-3" role="group" aria-label="Alphabet filter">
     <a href="<%= car_models_path %>" class="btn <%= 'active' unless params[:letter].present? %>">All</a>
     <% ('A'..'Z').each do |letter| %>
       <a href="<%= car_models_path(letter: letter) %>" class="btn <%= 'active' if params[:letter] == letter %>"><%= letter %></a>
     <% end %>
-  </div>
-  <div class="btn-group" role="group" aria-label="Filter by Number">
     <a href="<%= car_models_path(number: '0-9') %>" class="btn <%= 'active' if params[:number] == '0-9' %>">All Numbers</a>
+  </div>
+
+  <!-- Mobile layout: horizontal list with scrollbar -->
+  <div class="d-flex d-md-none overflow-auto mb-3">
+    <a href="<%= car_models_path %>" class="btn btn-outline-primary <%= 'active' unless params[:letter].present? %> me-1">All</a>
+    <% ('A'..'Z').each do |letter| %>
+      <a href="<%= car_models_path(letter: letter) %>" class="btn btn-outline-primary <%= 'active' if params[:letter] == letter %> me-1"><%= letter %></a>
+    <% end %>
+    <a href="<%= car_models_path(number: '0-9') %>" class="btn btn-outline-primary <%= 'active' if params[:number] == '0-9' %> me-1">All Numbers</a>
   </div>
 
   <div class="navbar navbar-expand-lg"  >

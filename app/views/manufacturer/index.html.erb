@@ -7,10 +7,19 @@
       Click on a letter or 'All' to view manufacturers starting with that letter.
     </p>
 
-    <div class="btn-group" role="group" aria-label="Filter by Letter">
+     <!-- Desktop layout: horizontal button group -->
+    <div class="btn-group d-none d-md-flex flex-md-wrap mb-3" role="group" aria-label="Alphabet filter">
       <a href="<%= manufacturer_index_path %>" class="btn <%= 'active' unless params[:letter].present? %>">All</a>
       <% ('A'..'Z').each do |letter| %>
         <a href="<%= manufacturer_index_path(letter: letter) %>" class="btn <%= 'active' if params[:letter] == letter %>"><%= letter %></a>
+      <% end %>
+    </div>
+
+    <!-- Mobile layout: horizontal scrollable list -->
+    <div class="d-flex d-md-none overflow-auto mb-3">
+      <a href="<%= manufacturer_index_path %>" class="btn btn-outline-primary <%= 'active' unless params[:letter].present? %> me-1">All</a>
+      <% ('A'..'Z').each do |letter| %>
+        <a href="<%= manufacturer_index_path(letter: letter) %>" class="btn btn-outline-primary <%= 'active' if params[:letter] == letter %> me-1"><%= letter %></a>
       <% end %>
     </div>
   </div>
