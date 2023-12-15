@@ -3,9 +3,8 @@
     <%= link_to root_path do %>
       <%= image_tag 'la-voiture-removebg.png', alt: 'La voiture logo', class: "navbar-brand", style: "max-height: 70px;" %>
     <% end %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+
+    <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
@@ -21,7 +20,10 @@
         <%= form.select :category, options_for_select([['Car Models', 'car_models'], ['Manufacturers', 'manufacturers']], selected: @category), include_blank: 'All Categories', class: 'form-select me-2' %>
         <%= form.submit 'Search', class: 'btn btn-primary' %>
       <% end %>
+    </div>
 
+    <!-- Right-aligned items -->
+    <div class="ms-auto d-flex align-items-center">
       <% if user_signed_in? %>
         <span class="navbar-text me-2"><%= current_user.email %></span>
         <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger ms-1", form_class: "d-inline" %>
@@ -29,9 +31,17 @@
         <%= link_to "Log in", new_user_session_path, class: "btn btn-light ms-1" %> |
         <%= link_to "Sign up", new_user_registration_path, class: "btn btn-light ms-1" %>
       <% end %>
-      <ul class="navbar-nav me-auto ">
-        <li class="nav-item"><%= link_to "🛒", cart_index_path, class: "nav-link" %><sup><%= cart.size %></sup></li>
-      </ul>
+
+      <li class="nav-item">
+        <%= link_to cart_index_path, class: 'nav-link ms-2' do %>
+          <i class="bi bi-cart3"></i>
+          <sup class="badge bg-primary rounded-pill"><%= cart.size %></sup>
+        <% end %>
+      </li>
+
+      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
   </div>
 </nav>
