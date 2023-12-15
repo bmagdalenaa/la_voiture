@@ -20,16 +20,17 @@
           <%= form_with(url: global_search_path, method: :get, class: 'd-flex') do |form| %>
             <%= form.text_field :query, value: @query, placeholder: 'Search', class: 'form-control me-2' %>
             <%= form.select :category, options_for_select([['Car Models', 'car_models'], ['Manufacturers', 'manufacturers']], selected: @category), include_blank: 'All Categories', class: 'form-select me-2' %>
-            <%= form.submit 'Search', class: 'btn btn-outline-success' %>
+            <%= form.submit 'Search', class: 'btn btn-primary' %>
           <% end %>
         </div>
       </section>
     </div>
-     <% if user_signed_in? %>
-        <span class="navbar-text me-2">Welcome <%= current_user.email %></span>
-        <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger ms-1", form_class: "d-inline" %>
-      <% else %>
-        <%= button_to "Sign in", new_user_session_path, class: "btn btn-light ms-1", form_class: "d-inline" %>
-      <% end %>
+      <% if user_signed_in? %>
+          <span class="navbar-text me-2"><%= current_user.email %></span>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger ms-1", form_class: "d-inline" %>
+        <% else %>
+          <%= link_to "Log in", new_user_session_path, class: "btn btn-light ms-1" %> |
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-light ms-1" %>
+        <% end %>
   </div>
 </nav>
