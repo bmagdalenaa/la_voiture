@@ -20,33 +20,27 @@
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
       <% @vehicles.each do |vehicle| %>
         <div class="col mb-5">
-          <div class="card h-100 align-items-center">
+          <div class="card h-100">
             <%= link_to vehicle_path(vehicle) do %>
-              <%= image_tag vehicle.image.variant(resize_to_limit:[200, 200]) %>
+              <%= image_tag(vehicle.image.variant(resize_to_limit: [300, 200]), class: 'card-img-top') %>
             <% end %>
-            <!-- Vehicle details placerholder -->
             <div class="card-body p-4">
               <div class="text-center">
-                <!-- Vehicle name placeholder -->
                 <h5 class="fw-bolder"><%= vehicle.vehicle_name %></h5>
-                <!-- Vehicle price placeholder-->
-                <%= number_to_currency(vehicle.vehicle_price, precision: 0) %>
+                <div class="mt-3"><%= number_to_currency(vehicle.vehicle_price, precision: 0) %></div>
               </div>
             </div>
-            <!-- Vehicle actions placeholder -->
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
               <div class="text-center">
-                  <%= link_to 'View Details', vehicle_path(vehicle), class: 'btn btn-outline-dark mt-auto mb-2' %>
-                  <% if cart.include?(vehicle) %>
-                    <%= button_to cart_path(vehicle), method: :delete do %>
-                      Remove From Cart
-                    <% end %>
-                  <% else %>
-                    <%= form_with  url: cart_index_path, method: :post do %>
-                      <%= hidden_field_tag(:id, vehicle.id) %>
-                      <%= button_tag '+ Add to Cart' %>
-                    <% end %>
+                <%= link_to 'View Details', vehicle_path(vehicle), class: 'btn btn-outline-dark mt-auto' %>
+                <% if cart.include?(vehicle) %>
+                  <%= button_to 'Remove From Cart', cart_path(vehicle), method: :delete, class: 'btn btn-danger mt-2' %>
+                <% else %>
+                  <%= form_with(url: cart_index_path, method: :post, class: 'd-inline') do %>
+                    <%= hidden_field_tag(:id, vehicle.id) %>
+                    <%= button_tag '+ Add to Cart', class: 'btn btn-primary mt-2' %>
                   <% end %>
+                <% end %>
               </div>
             </div>
           </div>
