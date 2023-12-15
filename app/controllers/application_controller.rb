@@ -1,7 +1,18 @@
 class ApplicationController < ActionController::Base
   before_action :set_breadcrumbs
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  private
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[address province_id])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[address province_id])
+  end
+
+  def set_dynamic_breadcrumb(controller_name)
+    breadcrumb_title = action_name == 'show' ? controller_name.titleize.singularize : action_name.titleize
+    add_breadcrumb breadcrumb_title, send("#{controller_name.singularize}_path") unless action_name == 'index'
+  end
 
   def set_breadcrumbs
     return if is_active_admin_page? || devise_controller? || controller_path == 'searches'
@@ -14,18 +25,12 @@ class ApplicationController < ActionController::Base
     when 'vehicles'
       add_breadcrumb 'Car Models', car_models_path
       add_breadcrumb @vehicle.car_model.name, car_model_path(@vehicle.car_model) if @vehicle&.car_model
-    when 'abouts'
-      # breadcrumb_title = action_name == 'show' ? 'About' : action_name.titleize
-      # add_breadcrumb breadcrumb_title, about_path unless action_name == 'index'
-      add_breadcrumb 'About', about_path unless action_name == 'show'
-    when 'contacts'
-      # breadcrumb_title = action_name == 'show' ? 'Contact' : action_name.titleize
-      # add_breadcrumb breadcrumb_title, contact_path unless action_name == 'index'
-      add_breadcrumb 'Contact', contact_path unless action_name == 'show'
+    when 'abouts', 'contacts'
+      set_dynamic_breadcrumb(controller_name)
     end
 
     # about/contact - show page
-    unless controller_name == 'home' || (['abouts', 'contacts'].include?(controller_name) && action_name == 'show')
+    unless controller_name == 'home' || (['abouts', 'contacts'].include?(controller_name))
       add_breadcrumb controller_name.titleize, controller_index_path
     end
 

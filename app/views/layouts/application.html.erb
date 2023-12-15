@@ -18,11 +18,15 @@
       <div class="container mt-1">
         <%= render_breadcrumbs %>
       </div>
+      <div>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      </div>
+
       <%= yield %>
     </section>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
 
     <footer class="py-4 bg-light">
       <%= render partial: 'layouts/components/footer' %>
