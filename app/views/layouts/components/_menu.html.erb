@@ -30,5 +30,8 @@
       <% else %>
         <%= button_to "Sign in", new_user_session_path, class: "btn btn-light ms-1", form_class: "d-inline" %>
       <% end %>
+      <ul class="navbar-nav me-auto ">
+        <li class="nav-item"><%= link_to "🛒", cart_index_path, class: "nav-link" %><sup><%= cart.size %></sup></li>
+      </ul>
   </div>
 </nav>

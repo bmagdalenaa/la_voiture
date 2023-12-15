@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :set_breadcrumbs
+  before_action :initialize_session
+  helper_method :cart
 
   private
 
@@ -38,5 +40,27 @@ class ApplicationController < ActionController::Base
   # Helper to generate path for the current action - manufacturer > show
   def action_path
     url_for(controller: controller_name, action: action_name)
+  end
+
+  def initialize_session
+    session[:visit_count] ||= 0
+  end
+
+  def increment_visit_count
+    session[:visit_count] += 1
+  end
+
+  def visit_count
+    session[:visit_count]
+  end
+
+  def initialize_session
+    # this will initialize the visit count to zero for new users.
+    # default value when the thing on the left hand side is UNSET, when nil set to 0
+    session[:cart] ||= [] # empty array of product IDs
+  end
+
+  def cart
+    Vehicle.find(session[:cart])
   end
 end
